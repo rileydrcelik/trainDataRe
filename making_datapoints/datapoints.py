@@ -13,6 +13,12 @@ import os
 # Load environment variables from .env file
 load_dotenv()
 
+print("hi")
+os.chdir('making_datapoints')
+print(os.getcwd())
+print(os.path.exists('unique_station_ids.csv'))
+print("hi2")
+
 # Access the API token
 API_TOKEN = os.getenv('API_TOKEN')
 # Unauthenticated client only works with public data sets. Note 'None'
@@ -114,9 +120,9 @@ def datapoint(station_id):
 
     return datapoint
 
-stations_df = pd.DataFrame()
-
 station_ids = pd.read_csv('unique_station_ids.csv')
+
+stations_df = pd.DataFrame()
 
 half_len = len(station_ids) // 2
 # Step 2: Loop through each row and print the value from the single column
@@ -129,9 +135,9 @@ for index, row in station_ids.iterrows():
 
 stations_df.to_csv('station_total_ridership_data.csv')
 
-for index, row in station_ids.iloc[half_len:].iterrows():
-    dpt = datapoint(row[0])
-    stations_df = pd.concat([stations_df, dpt], ignore_index=True)
-    print("station_id done: ", row[0])
+# for index, row in station_ids.iloc[half_len:].iterrows():
+#     dpt = datapoint(row[0])
+#     stations_df = pd.concat([stations_df, dpt], ignore_index=True)
+#     print("station_id done: ", row[0])
 
-stations_df.to_csv('station_total_ridership_data.csv', index=False)
+# stations_df.to_csv('station_total_ridership_data2.csv', index=False)
